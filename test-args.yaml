@@ -1,0 +1,17 @@
+url:
+  https://www.unimi.it/it
+
+tag_type:
+  div
+
+tag_identifier:
+  class
+
+tag_value:
+  card-content
+
+freq_val:
+  3
+
+freq_type:
+  s
