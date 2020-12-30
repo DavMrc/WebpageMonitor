@@ -28,7 +28,7 @@ class Gui(QMainWindow):
         self.app = QApplication(sys.argv)
         super(QMainWindow, self).__init__()
 
-        self.setWindowIcon(QIcon('./icon/logo.png'))
+        self.setWindowIcon(QIcon('./images/logo.png'))
         self.setWindowTitle("Monitor a webpage")
         self.setObjectName("MainWindow")
 
