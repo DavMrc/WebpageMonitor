@@ -1,6 +1,5 @@
 import requests
 import time
-from PyQt5.QtCore import QThread, pyqtSignal
 from bs4 import BeautifulSoup as BS
 
 from params import Params
@@ -11,6 +10,8 @@ class Monitor(object):
 		self.params = params
 
 	def start_thread(self, on_html_tag_changed: callable):
+		from mthread import MThread
+
 		self.thread = MThread(self.__start)
 		self.thread.start()
 		self.thread.signal.connect(on_html_tag_changed)
@@ -36,7 +37,7 @@ class Monitor(object):
 				target2 = target
 
 				while target2 == target:
-					print(f"Iter #{iter}\n{target2}")
+					print(f"Iter #{iter}\n{target2}\n--------------\n")
 					time.sleep(sleep_amount)
 
 					target2 = self.get_target_tag()
@@ -60,15 +61,3 @@ class Monitor(object):
 			self.params.tag_type,
 			attrs={self.params.tag_identifier: self.params.tag_value}
 		).prettify().strip('\n')
-
-
-class MThread(QThread):
-	signal = pyqtSignal(str)
-
-	def __init__(self, on_html_tag_changed: callable, parent=None):
-		super().__init__(parent=parent)
-		self.on_html_tag_changed = on_html_tag_changed
-
-	def run(self):
-		htmltag = self.on_html_tag_changed()
-		self.signal.emit(htmltag)

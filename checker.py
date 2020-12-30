@@ -67,7 +67,7 @@ class Checker(object):
 			tag_value = input("Tag's id or class must not be null, retry: ")
 
 		# frequency type
-		freq_type = input("Enter the time measure, being one of 'seconds', 'minutes' or 'hours'.\nShortcuts available: 's', 'm', 'h'")
+		freq_type = input("Enter the time measure, being one of 'seconds', 'minutes' or 'hours'.\nShortcuts available: 's', 'm', 'h'\n")
 		while not Checker.freq_type(freq_type):
 			freq_type = input("Time measure invalid, retry")
 		

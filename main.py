@@ -1,7 +1,6 @@
 import argparse
 import sys
 
-from gui import Gui
 from checker import Checker
 from monitor import Monitor
 
@@ -14,6 +13,8 @@ def main():
 	args = parser.parse_args()
 
 	if args.gui:
+		from gui import Gui
+
 		gui = Gui()
 		gui.mainloop()
 	else:
