@@ -1,6 +1,6 @@
 import requests
-import threading
 import time
+from PyQt5.QtCore import QObject, QRunnable, QThreadPool, pyqtSignal, pyqtSlot
 from bs4 import BeautifulSoup as BS
 
 from params import Params
@@ -10,14 +10,19 @@ class Monitor(object):
 	def __init__(self, params: Params):
 		self.params = params
 
-	def start_thread(self):
-		self.thread = threading.Thread(target=self.__start)
-		self.thread.start()
+	def start_thread(self, on_html_tag_change: callable):
+		# self.thread = threading.Thread(target=self.__start)
+		# self.thread.start()
+		thread = MThread(self.__start)
+		thread.signal.result.connect(on_html_tag_change)
+
+		pool = QThreadPool()
+		pool.start(thread)
 	
 	def start_sync(self):
 		return self.__start()
 	
-	def __start(self):
+	def __start(self) -> str:
 		# calculate sleep amount, i.e. frequency
 		sleep_amount = 0
 		if self.params.freq_type == 's' or self.params.freq_type == 'seconds':
@@ -64,8 +69,23 @@ class Monitor(object):
 			self.params.tag_type,
 			attrs={self.params.tag_identifier: self.params.tag_value}
 		)
-		
-	def join(self):
-		self.thread.join()
 
-		return self.test
+
+class MThread(QRunnable):
+	def __init__(self, func, *args, **kwargs):
+		super(MThread, self).__init__()
+
+		self.func = func
+		self.args = args
+		self.kwargs = kwargs
+		self.signal = Signal()
+
+	@pyqtSlot()
+	def run(self):
+		print('thread started')
+		result = self.func()
+		self.signal.result.emit(result)
+
+
+class Signal(QObject):
+	result = pyqtSignal(str)

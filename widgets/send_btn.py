@@ -63,24 +63,18 @@ class SendBtn(QPushButton):
 				'freq_val': freq_val,
 			})
 			monitor = Monitor(params)
-			monitor.start_thread()
+			monitor.start_thread(self.on_html_tag_change)
 
 			# insert result label
-			result_lab = ResultLab(self.parent)
-			_findchild(QHBoxLayout, 'row5').addWidget(result_lab)
+			self.result_lab = ResultLab(self.parent)
+			_findchild(QHBoxLayout, 'row5').addWidget(self.result_lab)
 
 			# start animation
-			result_lab.animate()
+			self.result_lab.animate()
 			# QTimer.singleShot(
 			# 	iters * result_lab.animation_dur, 
 			# 	lambda: result_lab.stop()
 			# )
-
-			# waits for conclusion
-			monitor.join()
-
-			# stop the animation
-			result_lab.stop()
 		else:
 			# handle error
 			error_msg = "Your input had the following errors:\n"
@@ -107,3 +101,9 @@ class SendBtn(QPushButton):
 			error_dialog.setText(error_msg)
 			error_dialog.setWindowTitle("Errore!")
 			error_dialog.exec_()
+	
+	def on_html_tag_change(self, html_tag):
+		# stop the animation
+		self.result_lab.stop()
+
+		print(html_tag)
