@@ -25,7 +25,6 @@ def main():
 			
 			monitor = Monitor(params)
 			monitor.start_sync()
-			monitor.join()
 
 		except KeyboardInterrupt:
 			sys.exit(1)
