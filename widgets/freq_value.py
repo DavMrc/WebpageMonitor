@@ -1,11 +1,11 @@
 from PyQt5.QtWidgets import QSpinBox
 
 
-class FreqVal(QSpinBox):
+class FreqValue(QSpinBox):
 	name = "freq_val"
 
 	def __init__(self, parent):
 		super().__init__(parent=parent)
 		self.parent = parent
-		self.setObjectName(FreqVal.name)
+		self.setObjectName(FreqValue.name)
 		self.setMinimum(1)

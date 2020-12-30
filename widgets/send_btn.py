@@ -1,13 +1,12 @@
-from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QHBoxLayout, QPushButton, QSizePolicy, QMessageBox
 from PyQt5.QtGui import QFont
 
 from widgets.url_inp import UrlInput
-from widgets.tag_inp import TagInput
-from widgets.freq_val import FreqVal
+from widgets.tag_type import TagType
+from widgets.freq_value import FreqValue
 from widgets.freq_type import FreqType
-from widgets.id_class_type import IdClassType
-from widgets.id_class_inp import IdClassInput
+from widgets.tag_identifier import TagIdentifier
+from widgets.tag_identifier_value import TagIdentifierValue
 from widgets.result_lab import ResultLab
 
 from checker import Checker
@@ -38,11 +37,11 @@ class SendBtn(QPushButton):
 		_findchild = self.parent.findChild  # for leaner code
 
 		url = _findchild(UrlInput, UrlInput.name).text()
-		tag_type = _findchild(TagInput, TagInput.name).currentText()
-		tag_identifier = _findchild(IdClassType, IdClassType.name).currentText()
-		tag_value = _findchild(IdClassInput, IdClassInput.name).text()
+		tag_type = _findchild(TagType, TagType.name).currentText()
+		tag_identifier = _findchild(TagIdentifier, TagIdentifier.name).currentText()
+		tag_value = _findchild(TagIdentifierValue, TagIdentifierValue.name).text()
 		freq_type = _findchild(FreqType, FreqType.name).currentText()
-		freq_val = _findchild(FreqVal, FreqVal.name).value()
+		freq_val = _findchild(FreqValue, FreqValue.name).value()
 
 		if (
 			Checker.url(url) and
@@ -71,10 +70,6 @@ class SendBtn(QPushButton):
 
 			# start animation
 			self.result_lab.animate()
-			# QTimer.singleShot(
-			# 	iters * result_lab.animation_dur, 
-			# 	lambda: result_lab.stop()
-			# )
 		else:
 			# handle error
 			error_msg = "Your input had the following errors:\n"
@@ -106,4 +101,5 @@ class SendBtn(QPushButton):
 		# stop the animation
 		self.result_lab.stop()
 
+		print('Button received the output!:')
 		print(html_tag)

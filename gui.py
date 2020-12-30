@@ -6,13 +6,13 @@ import sys
 from widgets.line import Line
 from widgets.monitor_lab import MonitorLab
 from widgets.tag_lab import TagLab
-from widgets.tag_inp import TagInput
+from widgets.tag_type import TagType
 from widgets.url_inp import UrlInput
-from widgets.id_class_inp import IdClassInput
-from widgets.id_class_type import IdClassType
+from widgets.tag_identifier_value import TagIdentifierValue
+from widgets.tag_identifier import TagIdentifier
 from widgets.freq_lab import FreqLabel
 from widgets.freq_type import FreqType
-from widgets.freq_val import FreqVal
+from widgets.freq_value import FreqValue
 from widgets.send_btn import SendBtn
 
 
@@ -75,22 +75,22 @@ class Gui(QMainWindow):
 
         self.tag_lab = TagLab(self.centralwidget)
         spacerItem1 = QtWidgets.QSpacerItem(26, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.tag_inp = TagInput(self.centralwidget)
+        self.tag_type_inp = TagType(self.centralwidget)
 
         self.row2.addWidget(self.tag_lab)
         self.row2.addItem(spacerItem1)
-        self.row2.addWidget(self.tag_inp)
+        self.row2.addWidget(self.tag_type_inp)
         self.verticalLayout.addLayout(self.row2)
 
         # row 3
         self.row3 = QtWidgets.QHBoxLayout()
         self.row3.setObjectName("row3")
 
-        self.id_class_type = IdClassType(self.centralwidget)
-        self.id_class_inp = IdClassInput(self.centralwidget)
+        self.tag_identifier_inp = TagIdentifier(self.centralwidget)
+        self.tag_identifier_value_inp = TagIdentifierValue(self.centralwidget)
 
-        self.row3.addWidget(self.id_class_type)
-        self.row3.addWidget(self.id_class_inp)
+        self.row3.addWidget(self.tag_identifier_inp)
+        self.row3.addWidget(self.tag_identifier_value_inp)
         self.verticalLayout.addLayout(self.row3)
 
         # row 4
@@ -98,14 +98,14 @@ class Gui(QMainWindow):
         self.row4.setObjectName("row4")
 
         self.freq_lab = FreqLabel(self.centralwidget)
-        self.freq_val = FreqVal(self.centralwidget)
+        self.freq_value = FreqValue(self.centralwidget)
         self.freq_type = FreqType(self.centralwidget) 
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
 
         self.row4.addWidget(self.freq_lab)
         self.row4.addItem(spacerItem2)
-        self.row4.addWidget(self.freq_val)
+        self.row4.addWidget(self.freq_value)
         self.row4.addItem(spacerItem3)
         self.row4.addWidget(self.freq_type)
         self.verticalLayout.addLayout(self.row4)
