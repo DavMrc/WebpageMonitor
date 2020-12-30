@@ -15,7 +15,7 @@ class Checker(object):
 
 	@staticmethod
 	def tag_value(tag_value: str) -> bool:
-		return len(tag_value) != 0 and ' ' not in tag_value
+		return len(tag_value) != 0
 	
 	@staticmethod
 	def tag_identifier(tag_identifier: str) -> bool:
