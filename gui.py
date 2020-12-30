@@ -29,7 +29,6 @@ class Gui(QMainWindow):
         super(QMainWindow, self).__init__()
 
         self.setWindowIcon(QIcon('./icon/logo.png'))
-        self.setFixedSize(QtCore.QSize(530, 277))
         self.setWindowTitle("Monitor a webpage")
         self.setObjectName("MainWindow")
 
