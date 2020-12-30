@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QHBoxLayout, QPushButton, QSizePolicy, QMessageBox
+from PyQt5.QtWidgets import QHBoxLayout, QPushButton, QSizePolicy, QMessageBox, QVBoxLayout
 from PyQt5.QtGui import QFont
 
 from widgets.url_inp import UrlInput
@@ -8,6 +8,7 @@ from widgets.freq_type import FreqType
 from widgets.tag_identifier import TagIdentifier
 from widgets.tag_identifier_value import TagIdentifierValue
 from widgets.result_lab import ResultLab
+from widgets.output_frame import OutputFrame
 
 from checker import Checker
 from params import Params
@@ -97,9 +98,10 @@ class SendBtn(QPushButton):
 			error_dialog.setWindowTitle("Errore!")
 			error_dialog.exec_()
 	
-	def on_html_tag_change(self, html_tag):
+	def on_html_tag_change(self, html_tag: str):
 		# stop the animation
 		self.result_lab.stop()
 
-		print('Button received the output!:')
-		print(html_tag)
+		# present the output in a new row
+		outputframe = OutputFrame(self.parent, html_tag)
+		self.parent.findChild(QVBoxLayout, "verticalLayout").addLayout(outputframe)

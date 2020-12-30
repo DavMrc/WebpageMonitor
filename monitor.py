@@ -36,7 +36,7 @@ class Monitor(object):
 				target2 = target
 
 				while target2 == target:
-					print(f"Iter #{iter}: {target2}")
+					print(f"Iter #{iter}\n{target2}")
 					time.sleep(sleep_amount)
 
 					target2 = self.get_target_tag()
@@ -59,7 +59,7 @@ class Monitor(object):
 		return soup.find(
 			self.params.tag_type,
 			attrs={self.params.tag_identifier: self.params.tag_value}
-		)
+		).prettify().strip('\n')
 
 
 class MThread(QThread):
