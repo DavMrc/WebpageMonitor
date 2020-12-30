@@ -1,5 +1,8 @@
-title
 div
+span
+a
+section
+title
 header
 footer
 h1
@@ -9,11 +12,8 @@ h4
 h5
 h6
 nav
-section
 li
 ol
 p
 ul
-a
-span
 img
